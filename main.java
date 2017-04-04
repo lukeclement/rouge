@@ -83,9 +83,9 @@ public class main extends Application{
       public void handle(long currentNanoTime){
         gc.drawImage(back,0,0);
         double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-        if(t>1){
+        if(t>0.1){
           startNanoTime=System.nanoTime();
-          mazy.generate(s++);
+          //mazy.generate(s++);
         }
         if(input.contains("A")){
           gc.drawImage(back,0,0);
