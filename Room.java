@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.*;
 
 public class Room{
   private int height;
@@ -37,8 +38,8 @@ public class Room{
   }
 
   public Room getNearestRoom(List<Room> rooms){
-    nearest=null;
-    for(room in rooms) if(nearest==null||this.distanceToRoom(room)<this.distanceToRoom(nearest)) nearest = room;
+    Room nearest=null;
+    for(Room room : rooms) if(nearest==null||this.distanceToRoom(room)<this.distanceToRoom(nearest)) nearest = room;
     return nearest;
   }
   public int distanceToRoom(Room room){

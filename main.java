@@ -66,7 +66,7 @@ public class main extends Application{
         final Maze mazy=new Maze(WIDTH,HEIGHT);
         System.out.println("Made maze!");
         Image back=new Image("res/Background/back.png");
-        
+
 
         new AnimationTimer(){
             public boolean generated=false;
@@ -76,8 +76,8 @@ public class main extends Application{
             public long startNanoTime=System.nanoTime();
             int smallOffsetX = 0;
             int smallOffsetY = 0;
-            int offsetX = width/2;
-            int offsetY = height/2;
+            int offsetX = WIDTH/2;
+            int offsetY = HEIGHT/2;
 
             public void drawBacking(){
                 int[][] map = mazy.getGrid();
@@ -113,8 +113,8 @@ public class main extends Application{
                 gc.drawImage(new Image("res/Wizards/grey.png"),WIDTH/2,HEIGHT/2);
             }
 
-      
-      
+
+
             //Updating the scene at 60 times per second
             public void handle(long currentNanoTime){
                 gc.drawImage(back,0,0);
@@ -123,10 +123,10 @@ public class main extends Application{
                     startNanoTime=System.nanoTime();
                     //mazy.generate(s++);
                 }
-                if(input.contains("A")){
+                /*if(input.contains("A")){
                     gc.drawImage(back,0,0);
                     mazy.generate(0);
-                }
+                }*/
                 for(int i=0;i<WIDTH;i++){
                     for(int j=0;j<HEIGHT;j++){
                         if(mazy.getGrid()[i][j]==1){
@@ -138,8 +138,8 @@ public class main extends Application{
                         }
                     }
                 }
-                
-                
+
+
                 if(input.contains("W")){
                     smallOffsetY -= 5;
                 }
@@ -156,6 +156,6 @@ public class main extends Application{
             }
         }.start();
         stage.show();
-        
+
     }
 }
