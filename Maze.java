@@ -82,19 +82,29 @@ public class Maze{
             grid[x][(int)((dy/dx)*x+c+1)]=1;
           }
         }
-        if(roomsToRemove.contains(i-1)){
+      }else{ // Steep gradient (treat var x as y)
+        if(nextTunnel.getStartX()<nextTunnel.getEndX()){
+          for(int x=nextTunnel.getStartX();x<nextTunnel.getEndX();x++){
+            grid[(int)((dx/dy)*x+c)][x]=1;
+            grid[(int)((dx/dy)*x+c+1)][x]=1;
+          }
+        }else{
+          for(int x=nextTunnel.getStartX();x>nextTunnel.getEndX();x--){
+            grid[(int)((dx/dy)*x+c)][x]=1;
+            grid[(int)((dx/dy)*x+c+1)][x]=1;
+          }
+        }
+        /*if(roomsToRemove.contains(i-1)){
           if(roomsToRemove.contains(i)){
             roomsToRemove.remove((Integer)(i));
           }
           roomsToRemove.remove((Integer)(i-1));
-        }
-      }else{
-        roomsToRemove.add(i);
+        }*/
       }
     }
-    for(int i=roomsToRemove.size();i>0;i--){
+    /*for(int i=roomsToRemove.size();i>0;i--){
       //rooms.remove(rooms.get(i-1));
-    }
+    }*/
     for(Room room:rooms){
       for(int i=room.getStartY();i<room.getEndY();i++){
         for(int j=room.getStartX();j<room.getEndX();j++){
