@@ -5,16 +5,18 @@ public class Maze{
   private int width;
   private int[][] grid;
 
-  public Maze(int x,int y){
+  public Maze(int x,int y,String input){
     height=y;
     width=x;
     grid=new int[x][y];
+    generate(0);
+    int p=0;
     for(int i=0;i<x;i++){
       for(int j=0;j<y;j++){
-        grid[i][j]=0;
+        grid[i][j]=Integer.parseInt(input.split(p,p+1));
+        p++;
       }
     }
-    generate(0);
   }
 
   public int rand(int a, int b){
