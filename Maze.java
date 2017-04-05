@@ -33,7 +33,7 @@ public class Maze{
         grid[i][j]=0;
       }
     }
-    int numberOfRooms=rand(200,900);
+    int numberOfRooms=rand(100,800);
     //numberOfRooms=num;
     List<Room> rooms=new ArrayList<>();
     System.out.println("Making rooms...");
@@ -66,13 +66,17 @@ public class Maze{
     }
     System.out.println("Making tunnels..");
     List<Integer> roomsToRemove=new ArrayList<>();
+    List<Room> roomsLinked = new ArrayList<>();
     for(int i=1;i<rooms.size();i++){
-      Tunnel nextTunnel=new Tunnel(rooms.get(i-1),rooms.get(i),false);
+      roomsLinked.add(rooms.get(i-1));
+      Room currentRoom=rooms.get(i);
+      Room linkTo=currentRoom.getNearestRoom(roomsLinked);
+      Tunnel nextTunnel=new Tunnel(linkTo,currentRoom,false);
       double dx=nextTunnel.getStartX()-nextTunnel.getEndX();
       double dy=nextTunnel.getStartY()-nextTunnel.getEndY();
       //System.out.println(nextTunnel.getStartX+" "+" "+i+" "+nextTunnel.getStartX());
-      double c=nextTunnel.getStartY()-(dy/dx)*nextTunnel.getStartX();
       if(Math.abs(dy/dx)<1){
+        double c=nextTunnel.getStartY()-(dy/dx)*nextTunnel.getStartX();
         if(nextTunnel.getStartX()<nextTunnel.getEndX()){
           for(int x=nextTunnel.getStartX();x<nextTunnel.getEndX();x++){
             grid[x][(int)((dy/dx)*x+c)]=1;
@@ -85,15 +89,16 @@ public class Maze{
           }
         }
       }else{ // Steep gradient (treat var x as y)
-        if(nextTunnel.getStartX()<nextTunnel.getEndX()){
-          for(int x=nextTunnel.getStartX();x<nextTunnel.getEndX();x++){
-            grid[(int)((dx/dy)*x+c)][x]=1;
-            grid[(int)((dx/dy)*x+c+1)][x]=1;
+        double c=nextTunnel.getStartX()-(dx/dy)*nextTunnel.getStartY();
+        if(nextTunnel.getStartY()<nextTunnel.getEndY()){
+          for(int y=nextTunnel.getStartY();y<nextTunnel.getEndY();y++){
+            grid[(int)((dx/dy)*y+c)][y]=1;
+            grid[(int)((dx/dy)*y+c+1)][y]=1;
           }
         }else{
-          for(int x=nextTunnel.getStartX();x>nextTunnel.getEndX();x--){
-            grid[(int)((dx/dy)*x+c)][x]=1;
-            grid[(int)((dx/dy)*x+c+1)][x]=1;
+          for(int y=nextTunnel.getStartY();y>nextTunnel.getEndY();y--){
+            grid[(int)((dx/dy)*y+c)][y]=1;
+            grid[(int)((dx/dy)*y+c+1)][y]=1;
           }
         }
         /*if(roomsToRemove.contains(i-1)){
