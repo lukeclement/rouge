@@ -127,7 +127,7 @@ public class main extends Application{
                     gc.drawImage(back,0,0);
                     mazy.generate(0);
                 }*/
-                /*for(int i=0;i<WIDTH;i++){
+                for(int i=0;i<WIDTH;i++){
                     for(int j=0;j<HEIGHT;j++){
                         if(mazy.getGrid()[i][j]==1){
                             //gc.setFill(Color.rgb(0,0,0));
@@ -137,7 +137,7 @@ public class main extends Application{
                             //gc.fillOval(i,j,1,1);
                         }
                     }
-                }*/
+                }
 
 
                 if(input.contains("W")){
@@ -152,7 +152,7 @@ public class main extends Application{
                 if(input.contains("D")){
                     smallOffsetX += 5;
                 }
-                drawBacking();
+                //drawBacking();
             }
         }.start();
         stage.show();
